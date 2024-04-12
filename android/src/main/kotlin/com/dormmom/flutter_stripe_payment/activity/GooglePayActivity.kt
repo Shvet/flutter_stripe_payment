@@ -2,7 +2,6 @@ package com.dormmom.flutter_stripe_payment.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.dormmom.flutter_stripe_payment.R
 import com.dormmom.flutter_stripe_payment.databinding.GooglePayActivityBinding
 import com.dormmom.flutter_stripe_payment.models.TempHolder
 import com.stripe.android.googlepaylauncher.GooglePayEnvironment

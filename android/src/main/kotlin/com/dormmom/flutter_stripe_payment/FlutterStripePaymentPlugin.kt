@@ -3,8 +3,6 @@ package com.dormmom.flutter_stripe_payment
 import android.app.Activity
 import android.content.Context
 import androidx.annotation.NonNull
-import androidx.appcompat.app.AppCompatActivity
-import com.dormmom.flutter_stripe_payment.plugin.FlutterStripeFactory
 
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.embedding.engine.plugins.FlutterPlugin
@@ -13,16 +11,19 @@ import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import io.flutter.plugin.common.*
 import io.flutter.plugin.platform.PlatformViewsController
 
-class FlutterStripePaymentPlugin: FlutterPlugin, ActivityAware {
+class FlutterStripePaymentPlugin : FlutterPlugin, ActivityAware {
 
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-        setUpPluginMethods(flutterPluginBinding.applicationContext, flutterPluginBinding.binaryMessenger);
+        setUpPluginMethods(
+            flutterPluginBinding.applicationContext,
+            flutterPluginBinding.binaryMessenger
+        );
     }
 
     companion object {
 
         lateinit var pluginInstance: FlutterStripeFactory
-        private lateinit var channel : MethodChannel
+        private lateinit var channel: MethodChannel
         private lateinit var eventChannel: EventChannel
         private var currentActivity: Activity? = null
 
@@ -37,7 +38,8 @@ class FlutterStripePaymentPlugin: FlutterPlugin, ActivityAware {
             viewController = engine.platformViewsController
             currentActivity?.let { activity ->
                 viewController?.registry?.registerViewFactory(
-                        view_name, StripeViewFactory(engine.dartExecutor.binaryMessenger, activity))
+                    view_name, StripeViewFactory(engine.dartExecutor.binaryMessenger, activity)
+                )
             }
         }
 
@@ -50,14 +52,18 @@ class FlutterStripePaymentPlugin: FlutterPlugin, ActivityAware {
         }
 
         @JvmStatic
-        private fun setUpPluginMethods(context: Context, messenger: BinaryMessenger, activity: Activity? = null ) {
+        private fun setUpPluginMethods(
+            context: Context,
+            messenger: BinaryMessenger,
+            activity: Activity? = null
+        ) {
 
             channel = MethodChannel(messenger, "flutter_stripe_payment")
             eventChannel = EventChannel(messenger, "flutter_stripe_payment_event")
 
-            pluginInstance = FlutterStripeFactory(messenger = messenger , context = context)
+            pluginInstance = FlutterStripeFactory(messenger = messenger, context = context)
 
-            if(activity != null)
+            if (activity != null)
                 pluginInstance.activity = activity;
 
             channel.setMethodCallHandler(pluginInstance)
@@ -90,7 +96,6 @@ class FlutterStripePaymentPlugin: FlutterPlugin, ActivityAware {
         currentActivity = null
         pluginInstance.activity = null
     }
-
 
 
 }

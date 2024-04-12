@@ -1,43 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:theme="@style/Theme.AppCompat.Light"
-    android:minWidth="360dp"
-    android:padding="20dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-<com.stripe.android.view.CardMultilineWidget
-    android:id="@+id/card_input_widget"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardTint="@android:color/holo_purple"
-    app:cardTextErrorColor="@android:color/holo_orange_dark" />
+    android:minWidth="360dp"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:theme="@style/Theme.AppCompat.Light">
+
+    <com.stripe.android.view.CardMultilineWidget
+        android:id="@+id/card_input_widget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardTextErrorColor="@android:color/holo_orange_dark"
+        app:cardTint="@android:color/holo_purple" />
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <Space
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/mProgressBar"
             style="@style/Widget.AppCompat.ProgressBar"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:id="@+id/mProgressBar"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <Button
+            android:id="@+id/btn_create_payment_method"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/save"
-            android:id="@+id/btn_create_payment_method"/>
+            android:text="@string/save" />
 
 
     </LinearLayout>
