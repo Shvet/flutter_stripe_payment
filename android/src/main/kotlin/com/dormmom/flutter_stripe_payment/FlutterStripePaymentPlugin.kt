@@ -3,12 +3,12 @@ package com.dormmom.flutter_stripe_payment
 import android.app.Activity
 import android.content.Context
 import androidx.annotation.NonNull
-
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import io.flutter.plugin.common.*
+import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.platform.PlatformViewsController
 
 class FlutterStripePaymentPlugin : FlutterPlugin, ActivityAware {
@@ -47,7 +47,8 @@ class FlutterStripePaymentPlugin : FlutterPlugin, ActivityAware {
         @JvmStatic
         fun registerWith(registrar: PluginRegistry.Registrar) {
             currentActivity = registrar.activity()
-            setUpPluginMethods(registrar.activity(), registrar.messenger(), currentActivity)
+            registrar.activity()
+                ?.let { setUpPluginMethods(it, registrar.messenger(), currentActivity) }
 
         }
 
