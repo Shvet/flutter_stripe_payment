@@ -7,11 +7,10 @@ class PaymentResponse {
   String? errorMessage;
 
   PaymentResponse.fromJson(Map json) {
-    this.paymentIntentId = json["paymentIntentId"] as String?;
-    this.paymentMethodId = json["paymentMethodId"] as String?;
-    this.errorMessage = json["errorMessage"] as String?;
-    this.status =
-        _$enumDecodeNullable(_$PaymentResponseStatusEnumMap, json['status']);
+    paymentIntentId = json["paymentIntentId"] as String?;
+    paymentMethodId = json["paymentMethodId"] as String?;
+    errorMessage = json["errorMessage"] as String?;
+    status = _$enumDecodeNullable(_$PaymentResponseStatusEnumMap, json['status']);
   }
 
   T _$enumDecodeNullable<T>(Map<T, dynamic> enumValues, dynamic source) {
@@ -25,8 +24,7 @@ class PaymentResponse {
     }
     return enumValues.entries
         .singleWhere((e) => e.value == source,
-            orElse: () => throw ArgumentError(
-                '`$source` is not one of the supported values: '
+            orElse: () => throw ArgumentError('`$source` is not one of the supported values: '
                 '${enumValues.values.join(', ')}'))
         .key;
   }

@@ -13,9 +13,6 @@ import com.dormmom.flutter_stripe_payment.models.TempHolder
 import com.stripe.android.PaymentAuthConfig
 import com.stripe.android.PaymentConfiguration
 import com.stripe.android.Stripe
-import com.stripe.android.googlepaylauncher.GooglePayEnvironment
-import com.stripe.android.googlepaylauncher.GooglePayLauncher
-import com.stripe.android.googlepaylauncher.GooglePayPaymentMethodLauncher
 import com.stripe.android.paymentsheet.PaymentSheet
 import com.stripe.android.paymentsheet.PaymentSheetResult
 import io.flutter.plugin.common.BinaryMessenger

@@ -1,12 +1,14 @@
 import 'dart:async';
 import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+
 import 'enums/enums.dart';
 import 'models/models.dart';
 
 class FlutterStripePayment {
-  static const MethodChannel _channel =
-      const MethodChannel('flutter_stripe_payment');
+  static const MethodChannel _channel = MethodChannel('flutter_stripe_payment');
 
   FlutterStripePayment() {
     _setupOutputCallbacks();
@@ -19,15 +21,10 @@ class FlutterStripePayment {
   Function(int errorCode, [String errorMessage])? onError;
 
   ///Configure the environment with your Stripe Publishable Keys and optional Apple Pay Identifiers
-  Future<void> setStripeSettings(String stripePublishableKey,
-      [String? applePayMerchantIdentifier]) async {
-    final Map<String, dynamic> args = <String, dynamic>{
-      "stripePublishableKey": stripePublishableKey
-    };
+  Future<void> setStripeSettings(String stripePublishableKey, [String? applePayMerchantIdentifier]) async {
+    final Map<String, dynamic> args = <String, dynamic>{"stripePublishableKey": stripePublishableKey};
     if (applePayMerchantIdentifier != null) {
-      args.addAll(<String, dynamic>{
-        "applePayMerchantIdentifier": applePayMerchantIdentifier
-      });
+      args.addAll(<String, dynamic>{"applePayMerchantIdentifier": applePayMerchantIdentifier});
     }
     await _channel.invokeMethod('setStripeSettings', args);
   }
@@ -40,8 +37,7 @@ class FlutterStripePayment {
   }
 
   ///Use to process immediate payments
-  Future<PaymentResponse> confirmPaymentIntent(
-      String clientSecret, String stripePaymentMethodId, double amount,
+  Future<PaymentResponse> confirmPaymentIntent(String clientSecret, String stripePaymentMethodId, double amount,
       [bool isApplePay = false]) async {
     final Map<String, dynamic> args = <String, dynamic>{
       "clientSecret": clientSecret,
@@ -55,8 +51,7 @@ class FlutterStripePayment {
   }
 
   ///Use to setup future payments
-  Future<PaymentResponse> setupPaymentIntent(
-      String clientSecret, String stripePaymentMethodId,
+  Future<PaymentResponse> setupPaymentIntent(String clientSecret, String stripePaymentMethodId,
       [bool isApplePay = false]) async {
     final Map<String, dynamic> args = <String, dynamic>{
       "clientSecret": clientSecret,
@@ -85,7 +80,9 @@ class FlutterStripePayment {
           onError?.call(code, message);
           break;
         default:
-          print('Unknown method ${call.method}');
+          if (kDebugMode) {
+            print('Unknown method ${call.method}');
+          }
       }
     }
 
@@ -130,17 +127,14 @@ class FlutterStripePayment {
       bool isPending = false,
       required List<PaymentItem> paymentItems}) async {
     final Map<String, dynamic> args = <String, dynamic>{
-      'paymentNetworks':
-          paymentNetworks.map((item) => item.toString().split('.')[1]).toList(),
+      'paymentNetworks': paymentNetworks.map((item) => item.toString().split('.')[1]).toList(),
       'countryCode': countryCode,
       'currencyCode': currencyCode,
-      'paymentItems':
-          paymentItems.map((PaymentItem item) => item.toMap()).toList(),
+      'paymentItems': paymentItems.map((PaymentItem item) => item.toMap()).toList(),
       'merchantName': merchantName,
       'isPending': isPending
     };
-    final dynamic stripeToken =
-        await _channel.invokeMethod('getPaymentMethodFromNativePay', args);
+    final dynamic stripeToken = await _channel.invokeMethod('getPaymentMethodFromNativePay', args);
     return stripeToken;
   }
 

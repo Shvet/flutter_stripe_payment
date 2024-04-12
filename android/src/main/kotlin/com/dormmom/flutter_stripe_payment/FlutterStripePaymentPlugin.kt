@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
+import com.dormmom.flutter_stripe_payment.plugin.FlutterStripeFactory
 
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.embedding.engine.plugins.FlutterPlugin

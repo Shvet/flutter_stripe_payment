@@ -2,11 +2,8 @@ package com.dormmom.flutter_stripe_payment
 
 import android.app.Activity
 import android.content.Context
-import android.content.pm.ApplicationInfo
-import android.content.pm.PackageManager
-import android.os.Bundle
-import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
+import com.dormmom.flutter_stripe_payment.plugin.FlutterStripeFactory
 
 import io.flutter.plugin.platform.PlatformView
 import io.flutter.plugin.common.BinaryMessenger

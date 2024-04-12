@@ -5,9 +5,9 @@ class PaymentItem {
   PaymentItem({required this.label, required this.amount});
 
   Map<String, dynamic> toMap() {
-    Map<String, dynamic> map = new Map();
-    map["label"] = this.label;
-    map["amount"] = this.amount;
+    Map<String, dynamic> map = {};
+    map["label"] = label;
+    map["amount"] = amount;
     return map;
   }
 }
